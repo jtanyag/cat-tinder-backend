@@ -22,8 +22,12 @@ app.get('/cats', (req, res) => {
 })
 
 app.get('/CatProfile/:id', (req, res) => {
-  Cat.findById().then( (cats) =>{
-    res.json({cats:cats})
+  Cat.findAll({
+    where: {
+      id: req.params["id"],
+    }
+  }).then( (cat) =>{
+    res.json(cat)
   })
 })
 
@@ -50,9 +54,5 @@ app.post('/cats', (req, res) => {
       }
     })
 })
-
-app.delete('/cats', function (req, res) {
-  res.send('DELETE cats');
-});
 
 module.exports = app
